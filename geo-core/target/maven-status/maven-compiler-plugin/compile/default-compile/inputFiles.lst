@@ -1,0 +1,8 @@
+/Users/robin/work/haidilao/hdl-interface-proxy/interface-proxy-core/src/main/java/com/haidilao/interfaces/proxy/cache/RedisUtils.java
+/Users/robin/work/haidilao/hdl-interface-proxy/interface-proxy-core/src/main/java/com/haidilao/interfaces/proxy/http/HttpClientBean.java
+/Users/robin/work/haidilao/hdl-interface-proxy/interface-proxy-core/src/main/java/com/haidilao/interfaces/proxy/util/Base64code.java
+/Users/robin/work/haidilao/hdl-interface-proxy/interface-proxy-core/src/main/java/com/haidilao/interfaces/proxy/cache/RedisConfig.java
+/Users/robin/work/haidilao/hdl-interface-proxy/interface-proxy-core/src/main/java/com/haidilao/interfaces/proxy/util/StringToMap.java
+/Users/robin/work/haidilao/hdl-interface-proxy/interface-proxy-core/src/main/java/com/haidilao/interfaces/proxy/hsfConfig/HSFconfig.java
+/Users/robin/work/haidilao/hdl-interface-proxy/interface-proxy-core/src/main/java/com/haidilao/interfaces/proxy/service/DuibaProxyService.java
+/Users/robin/work/haidilao/hdl-interface-proxy/interface-proxy-core/src/main/java/com/haidilao/interfaces/proxy/service/impl/HttpProxyServiceImp.java

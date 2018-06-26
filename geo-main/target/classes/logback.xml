@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+
+    <!--<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
+        <!--<encoder charset="UTF-8">-->
+            <!--<pattern>[%date{yyyy-MM-dd HH:mm:ss}] [ %-5level] [%thread] %logger{96} [%line] - %msg%n</pattern>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+    <property name="LOG_HOME" value="${LOG_PATH}" />
+
+    <appender name="DEFAULT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--说明：在dev时日志路径为相对路径，如果启动使用的是tomcat，则日志文件在tomcat目录下的log目录中-->
+        <!--如果使用的是jetty，则日志文件在项目模块目录下的log目录中-->
+        <file>${LOG_HOME}/interface.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>[%date{yyyy-MM-dd HH:mm:ss}] [ %-5level] [%thread] %logger{96} [%line] - %msg%n</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logging.path}/%d{yyyy-MM-dd}-interface.log.zip</fileNamePattern>
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="CORE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--说明：在dev时日志路径为相对路径，如果启动使用的是tomcat，则日志文件在tomcat目录下的log目录中-->
+        <!--如果使用的是jetty，则日志文件在项目模块目录下的log目录中-->
+        <file>${LOG_HOME}/interface-core.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>[%date{yyyy-MM-dd HH:mm:ss}] [ %-5level] [%thread] %logger{96} [%line] - %msg%n</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logging.path}/%d{yyyy-MM-dd}-interface-core.log.zip</fileNamePattern>
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="SERVICE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--说明：在dev时日志路径为相对路径，如果启动使用的是tomcat，则日志文件在tomcat目录下的log目录中-->
+        <!--如果使用的是jetty，则日志文件在项目模块目录下的log目录中-->
+        <file>${LOG_HOME}/interface-service.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>[%date{yyyy-MM-dd HH:mm:ss}] [ %-5level] [%thread] %logger{96} [%line] - %msg%n</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logging.path}/%d{yyyy-MM-dd}-interface-service.log.zip</fileNamePattern>
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="DAO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--说明：在dev时日志路径为相对路径，如果启动使用的是tomcat，则日志文件在tomcat目录下的log目录中-->
+        <!--如果使用的是jetty，则日志文件在项目模块目录下的log目录中-->
+        <file>${LOG_HOME}/interface-dao.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>[%date{yyyy-MM-dd HH:mm:ss}] [ %-5level] [%thread] %logger{96} [%line] - %msg%n</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logging.path}/%d{yyyy-MM-dd}-interface-dao.log.zip</fileNamePattern>
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="com.icongtai.geo.center" level="WARN">
+        <appender-ref ref="DEFAULT"/>
+    </logger>
+    <logger name="com.icongtai.geo.proxy.core" level="WARN">
+        <appender-ref ref="CORE"/>
+    </logger>
+    <logger name="com.icongtai.geo.proxy.core.service" level="WARN">
+        <appender-ref ref="SERVICE"/>
+    </logger>
+    <logger name="com.icongtai.geo.proxy.core.dao" level="WARN">
+        <appender-ref ref="DAO"/>
+    </logger>
+
+    <root level="INFO">
+        <!--<appender-ref ref="STDOUT"/>-->
+        <appender-ref ref="DEFAULT"/>
+    </root>
+</configuration>
