@@ -1,8 +1,0 @@
-com/haidilao/interfaces/proxy/hsfConfig/HSFconfig.class
-com/haidilao/interfaces/proxy/cache/RedisUtils.class
-com/haidilao/interfaces/proxy/service/impl/HttpProxyServiceImp.class
-com/haidilao/interfaces/proxy/cache/RedisConfig.class
-com/haidilao/interfaces/proxy/util/StringToMap.class
-com/haidilao/interfaces/proxy/service/DuibaProxyService.class
-com/haidilao/interfaces/proxy/util/Base64code.class
-com/haidilao/interfaces/proxy/http/HttpClientBean.class
