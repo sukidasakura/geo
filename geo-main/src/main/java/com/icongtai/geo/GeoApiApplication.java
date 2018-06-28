@@ -2,13 +2,11 @@ package com.icongtai.geo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
-/**
- * @author hexu
- * @since 2018-05-08 00:41
- */
+
 @SpringBootApplication
-//@MapperScan("com.haidilao.interfaces.core.dao")
+@ComponentScan(basePackages = { "com.icongtai.geo" })
 public class GeoApiApplication {
 
 	public static void main(String[] args) {

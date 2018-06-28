@@ -1,2 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
-/interface-proxy-main/src/main/resources/application-local.properties
+target/
+.idea/
+*.iml
+
