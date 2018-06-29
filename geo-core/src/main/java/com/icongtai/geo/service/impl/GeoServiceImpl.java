@@ -14,11 +14,7 @@ import java.util.List;
  * 地理位置服务具体实现
  */
 @Service
-@ComponentScan(basePackages = { "com.icongtai.geo" })
 public class GeoServiceImpl implements GeoService {
-
-    @Autowired
-    private GeoRepository geoRepository;
 
     @Override
     public List<GeoReGeoInfo> getGeoReGeoInfo(String location, String distance,
@@ -32,5 +28,26 @@ public class GeoServiceImpl implements GeoService {
             String district, String firstly_classification,
             String secondary_classification) {
         return null;
+    }
+
+    @Override
+    public List<GeoReGeoInfo> getGeoReGeoQuery(String locations, String distances, String types,
+                                               String firstly_classification, String secondary_classification,
+                                               String province, String city, String district,
+                                               String township, String business_circle,
+                                               String formatted_address, String avg_price,
+                                               String shops, String good_comments, String lvl,
+                                               String leisure_type, String fun_type,
+                                               String energy_type, String numbers, String from,
+                                               String size, String extentions, boolean searchGaoDe) {
+        return new GeoRepository().getGeoReGeoQuery(locations, distances, types,
+                firstly_classification, secondary_classification,
+                province, city, district,
+                township, business_circle,
+                formatted_address, avg_price,
+                shops, good_comments, lvl,
+                leisure_type, fun_type,
+                energy_type, numbers, from,
+                size, extentions, searchGaoDe);
     }
 }

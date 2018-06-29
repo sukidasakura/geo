@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.icongtai.geo" })
+//@ComponentScan(basePackages = { "com.icongtai.geo" })
 public class GeoApiApplication {
 
 	public static void main(String[] args) {
