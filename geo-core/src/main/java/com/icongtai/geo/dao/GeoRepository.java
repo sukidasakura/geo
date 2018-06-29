@@ -276,7 +276,7 @@ public class GeoRepository {
     }
 
 
-    public List<GeoReGeoInfo> getGeoReGeoQuery(String locations, String distances, String types,
+    public List<GeoReGeoInfo> getGeoReGeoQuery(String name, String locations, String distances, String types,
                                                String firstly_classification, String secondary_classification,
                                                String province, String city, String district,
                                                String township, String business_circle,
@@ -291,8 +291,15 @@ public class GeoRepository {
         BoolQueryBuilder totalComonFiledQuery = QueryBuilders.boolQuery();
 
         //多个点的条件下的公共查询条件，
-        // type_name 列表
         BoolQueryBuilder tmpQuery = QueryBuilders.boolQuery();
+
+        // name 商店名字,医院名字，公司名字，教育机构名字
+        if (StringUtil.isNotEmptyOrNull(name)) {
+            totalComonFiledQuery.must(QueryBuilders.matchQuery(Constance.FIELD_ZEBRA_NAME,
+                    name));
+        }
+
+        // type_name 列表
         if (StringUtil.isNotEmptyOrNull(types)) {
             for (String type : types.split(Constance.SPLIT_TYPES)) { // 类型之间用逗号分隔
                 tmpQuery.should(QueryBuilders.termQuery(Constance.FIELD_ZEBRA_TYPE, type));

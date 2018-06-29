@@ -72,7 +72,7 @@ public interface GeoService {
      * @return 查询Geo 地理信息库后返回的结果
      */
     List<GeoReGeoInfo> getGeoReGeoQuery(
-            String locations, String distances, String types,
+            String name, String locations, String distances, String types,
             String firstly_classification, String secondary_classification,
             String province, String city, String district,
             String township, String business_circle,

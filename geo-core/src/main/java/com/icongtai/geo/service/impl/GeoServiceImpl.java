@@ -31,7 +31,7 @@ public class GeoServiceImpl implements GeoService {
     }
 
     @Override
-    public List<GeoReGeoInfo> getGeoReGeoQuery(String locations, String distances, String types,
+    public List<GeoReGeoInfo> getGeoReGeoQuery(String name, String locations, String distances, String types,
                                                String firstly_classification, String secondary_classification,
                                                String province, String city, String district,
                                                String township, String business_circle,
@@ -40,7 +40,7 @@ public class GeoServiceImpl implements GeoService {
                                                String leisure_type, String fun_type,
                                                String energy_type, String numbers, String from,
                                                String size, String extentions, boolean searchGaoDe) {
-        return new GeoRepository().getGeoReGeoQuery(locations, distances, types,
+        return new GeoRepository().getGeoReGeoQuery(name, locations, distances, types,
                 firstly_classification, secondary_classification,
                 province, city, district,
                 township, business_circle,

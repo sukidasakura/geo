@@ -44,7 +44,7 @@ public class ApiStatusController {
 
     @RequestMapping(path="/api/georegeo-query", method = RequestMethod.GET)
     @ResponseBody
-    public List<GeoReGeoInfo> getGeoReGeoQury(String locations, String distances, String types,
+    public List<GeoReGeoInfo> getGeoReGeoQury(String name, String locations, String distances, String types,
           String firstly_classification, String secondary_classification,
           String province, String city, String district,
           String township, String business_circle,
@@ -125,7 +125,7 @@ public class ApiStatusController {
             GeoUtil.returnErrorGeoRegeoInfos("搜索范围 from 格式不正确");
         }
 
-        return new GeoServiceImpl().getGeoReGeoQuery(locations, distances, types,
+        return new GeoServiceImpl().getGeoReGeoQuery(name,locations, distances, types,
                 firstly_classification, secondary_classification,
                 province, city, district,
                 township, business_circle,
