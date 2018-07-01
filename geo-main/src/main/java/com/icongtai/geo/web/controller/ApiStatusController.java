@@ -43,6 +43,7 @@ public class ApiStatusController {
     }
 
     @RequestMapping(path="/api/aggrationValue", method = RequestMethod.GET)
+    @ResponseBody
     public AggregationValues getAggrationValue(String province, String city, String district,
                                               String firstly_classification,
                                               String secondary_classification,

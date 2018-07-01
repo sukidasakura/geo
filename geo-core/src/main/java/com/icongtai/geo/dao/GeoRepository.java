@@ -712,7 +712,7 @@ public class GeoRepository {
         // 聚合查询
         AggregationBuilder aggregationBuilder = null;
         if (StringUtil.isNotEmptyOrNull(aggrationField)) {
-            aggregationBuilder = AggregationBuilders.terms("aggregationValues")
+            aggregationBuilder = AggregationBuilders.terms("all_values")
                     .field(aggrationField);
         }
 
@@ -726,13 +726,14 @@ public class GeoRepository {
                 .setFrom(Integer.parseInt(from))
                 .setSize(Integer.parseInt(size));
 
-        SearchResponse searchResponse = searchRequestBuilder.get();
-        Terms terms = searchResponse.getAggregations().get("aggregationValues");
+        SearchResponse searchResponse = searchRequestBuilder.execute().actionGet();
+        Terms terms = searchResponse.getAggregations().get("all_values");
 
         AggregationValues aggregationValues = new AggregationValues();
         List<String> aggreValues = new CopyOnWriteArrayList<>();
         for (Terms.Bucket bucket:terms.getBuckets()) {
             aggreValues.add(bucket.getKeyAsString());
+            System.out.printf("------------" + bucket.getKeyAsString());
         }
         aggregationValues.setStatus(Constance.STATUS_SUCCESS);
         aggregationValues.setStatusInfo("ok");
