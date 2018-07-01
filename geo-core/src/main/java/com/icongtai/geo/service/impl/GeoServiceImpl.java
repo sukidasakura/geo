@@ -1,11 +1,9 @@
 package com.icongtai.geo.service.impl;
 
 import com.icongtai.geo.dao.GeoRepository;
-import com.icongtai.geo.model.BrandsAndBusinessCircles;
+import com.icongtai.geo.model.AggregationValues;
 import com.icongtai.geo.model.GeoReGeoInfo;
 import com.icongtai.geo.service.GeoService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,11 +22,19 @@ public class GeoServiceImpl implements GeoService {
     }
 
     @Override
-    public BrandsAndBusinessCircles getBrandsAndBusinessCircles(
-            String district, String firstly_classification,
-            String secondary_classification) {
-        return null;
+    public AggregationValues getAggregationValues(String province,
+                                                         String city, String district,
+                                                         String firstly_classification,
+                                                         String secondary_classification,
+                                                         String aggrationField,
+                                                         String from,
+                                                         String size) {
+
+        return new GeoRepository().getAggregationValues(province,city,
+                district, firstly_classification, secondary_classification,
+                aggrationField, from, size);
     }
+
 
     @Override
     public List<GeoReGeoInfo> getGeoReGeoQuery(String name, String locations, String distances, String types,

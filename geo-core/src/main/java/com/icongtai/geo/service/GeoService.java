@@ -1,7 +1,7 @@
 package com.icongtai.geo.service;
 
 
-import com.icongtai.geo.model.BrandsAndBusinessCircles;
+import com.icongtai.geo.model.AggregationValues;
 import com.icongtai.geo.model.GeoReGeoInfo;
 
 import java.util.List;
@@ -35,9 +35,11 @@ public interface GeoService {
      *                                 比如购物下面的商场，零售店，专卖店
      * @return 去重后的品牌和商圈列表
      */
-    BrandsAndBusinessCircles getBrandsAndBusinessCircles(
-            String district, String firstly_classification,
-            String secondary_classification);
+    AggregationValues getAggregationValues(
+            String province, String city, String district,
+            String firstly_classification,
+            String secondary_classification,
+            String aggrationField, String from, String size);
 
     /**
      * 查询地理位置的接口

@@ -1,5 +1,6 @@
 package com.icongtai.geo.web.controller;
 
+import com.icongtai.geo.model.AggregationValues;
 import com.icongtai.geo.model.Constance;
 import com.icongtai.geo.model.GeoReGeoInfo;
 import com.icongtai.geo.service.impl.GeoServiceImpl;
@@ -39,6 +40,16 @@ public class ApiStatusController {
                               String types, String extensions, String searchGaoDe) {
         return new GeoServiceImpl().getGeoReGeoInfo(locations, distance, types,
                 extensions, Boolean.parseBoolean(searchGaoDe));
+    }
+
+    @RequestMapping(path="/api/aggrationValue", method = RequestMethod.GET)
+    public AggregationValues getAggrationValue(String province, String city, String district,
+                                              String firstly_classification,
+                                              String secondary_classification,
+                                              String aggrationField, String from, String size) {
+        return new GeoServiceImpl().getAggregationValues(province, city, district,
+                firstly_classification, secondary_classification,
+                aggrationField, from, size);
     }
 
 

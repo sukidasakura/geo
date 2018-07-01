@@ -3,6 +3,7 @@ package com.icongtai.geo.dao;
 import com.icongtai.geo.esconfig.ElasticSearchHelper;
 import com.icongtai.geo.model.*;
 import com.icongtai.geo.utils.StringUtil;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -13,6 +14,9 @@ import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.aggregations.AggregationBuilder;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.sort.SortBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
@@ -672,9 +676,79 @@ public class GeoRepository {
         return geoReGeoInfos;
     }
 
-    public BrandsAndBusinessCircles getBrandsAndBusinessCircles(
-            String district, String firstly_classification,
-            String secondary_classification) {
-        return null;
+    public AggregationValues getAggregationValues(String province,
+                                                    String city, String district,
+                                                    String firstly_classification,
+                                                    String secondary_classification,
+                                                    String aggrationField,
+                                                    String from,
+                                                    String size) {
+        //开始封装query查询
+        //总的query 对象
+        BoolQueryBuilder totalBoolQuery = QueryBuilders.boolQuery();
+        //针对 province 的查询
+        if (StringUtil.isNotEmptyOrNull(province)) {
+            totalBoolQuery.must(QueryBuilders.termQuery(Constance.FIELD_ZEBRA_PROVINCE, province));
+        }
+        //针对 city 的查询
+        if (StringUtil.isNotEmptyOrNull(city)) {
+            totalBoolQuery.must(QueryBuilders.termQuery(Constance.FIELD_ZEBRA_CITY, city));
+        }
+        //针对 district 的查询
+        if (StringUtil.isNotEmptyOrNull(district)) {
+            totalBoolQuery.must(QueryBuilders.termQuery(Constance.FIELD_ZEBRA_DISTRICT, district));
+        }
+        //针对 district 的查询
+        if (StringUtil.isNotEmptyOrNull(firstly_classification)) {
+            totalBoolQuery.must(QueryBuilders.termQuery(Constance.FIELD_ZEBRA_FIRSTLY_CLASSIFICATION,
+                    firstly_classification));
+        }
+        //针对 district 的查询
+        if (StringUtil.isNotEmptyOrNull(secondary_classification)) {
+            totalBoolQuery.must(QueryBuilders.termQuery(Constance.FIELD_ZEBRA_SECONDARY_CLASSIFICATION,
+                    secondary_classification));
+        }
+
+        // 聚合查询
+        AggregationBuilder aggregationBuilder = null;
+        if (StringUtil.isNotEmptyOrNull(aggrationField)) {
+            aggregationBuilder = AggregationBuilders.terms("aggregationValues")
+                    .field(aggrationField);
+        }
+
+        // 开始封装查询对象
+        SearchRequestBuilder searchRequestBuilder = null;
+
+        searchRequestBuilder = ElasticSearchHelper.getInstance().getClient().prepareSearch(index)
+                .setTypes(types)
+                .setQuery(totalBoolQuery)
+                .addAggregation(aggregationBuilder)
+                .setFrom(Integer.parseInt(from))
+                .setSize(Integer.parseInt(size));
+
+        SearchResponse searchResponse = searchRequestBuilder.get();
+        Terms terms = searchResponse.getAggregations().get("aggregationValues");
+
+        AggregationValues aggregationValues = new AggregationValues();
+        List<String> aggreValues = new CopyOnWriteArrayList<>();
+        for (Terms.Bucket bucket:terms.getBuckets()) {
+            aggreValues.add(bucket.getKeyAsString());
+        }
+        aggregationValues.setStatus(Constance.STATUS_SUCCESS);
+        aggregationValues.setStatusInfo("ok");
+        aggregationValues.setAggregationValuses(aggreValues);
+
+        return aggregationValues;
+//        if (hits.length > 0) {
+//            AggregationValues aggregationValues = new AggregationValues();
+//            aggregationValues.setStatus(0);
+//            aggregationValues.setStatusInfo("未匹配到任何符合条件的数据.");
+//            return aggregationValues;
+//        } else {
+//            for (SearchHit hit:hits) {
+//
+//            }
+//            return null;
+//        }
     }
 }
